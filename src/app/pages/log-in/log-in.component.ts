@@ -17,6 +17,8 @@ export class LogInComponent implements OnInit {
   signInForm!: FormGroup;
   public submitted = false;
   error: string | null = null;
+  isLoading: boolean = false;
+  OauthLoader: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -51,20 +53,22 @@ export class LogInComponent implements OnInit {
 
     const email: string = this.signInForm.value.email;
     const password: string = this.signInForm.value.password;
-
+    this.isLoading = true;
     this.authService.logIn(email, password).subscribe(
-      (response) => {
-        console.log('Sign-In Successful', response);
+      () => {
+        this.isLoading = false;
         // reset the form and navigate to another page
         this.router.navigateByUrl('/');
         this.signInForm.reset();
         this.submitted = false;
       },
       (error) => {
+        this.isLoading = false;
         if (error.message.includes('credential')) {
           this.error = 'Invalid Credentials';
         } else {
           console.log(error.message);
+
           this.error = 'Something went wrong';
         }
       }
@@ -75,7 +79,16 @@ export class LogInComponent implements OnInit {
    * Handles Google Sign-In.
    */
   signInWithGoogle(): void {
-    console.log('sign in with google clicked');
-    this.authService.loginWithGoogle();
+    this.OauthLoader = true;
+    this.authService.loginWithGoogle().subscribe({
+      next: () => {
+        this.OauthLoader = false;
+        this.router.navigateByUrl('/');
+      },
+      error: (err) => {
+        this.OauthLoader = false;
+        this.error = 'Pop Up Closed, please try again 🙏';
+      },
+    });
   }
 }

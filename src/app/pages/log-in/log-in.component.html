@@ -30,7 +30,7 @@
       </div>
 
       <!-- Password Input -->
-      <div class="input__wrapper">
+      <div class="input__wrapper mb-2">
         <input
           [ngClass]="{
             input__error: submitted && password?.invalid,
@@ -54,7 +54,9 @@
 
       <!-- Submit Button -->
       <button type="submit" class="bg-green-primary hover:bg-green-hover">
-        Sign In to your account
+        @if (isLoading) {
+        <span>Loading...</span>
+        } @else { Sign In to your account }
       </button>
 
       <h1 class="text-center">Or</h1>
@@ -90,7 +92,13 @@
             />
           </svg>
         </span>
-        <span>Sign In with Google</span>
+        <h1>
+          @if (OauthLoader) {
+          <span>Loading ...</span>
+          }@else {
+          <span> Sign In with Google</span>
+          }
+        </h1>
       </div>
     </form>
 
