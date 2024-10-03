@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { user } from '@angular/fire/auth';
+import { User, user } from '@angular/fire/auth';
 import {
   addDoc,
   collection,
@@ -23,7 +23,7 @@ export class BlogsService {
   }
 
   createBlog(
-    author: string,
+    author: any,
     title: string,
     description: string
   ): Observable<string> {

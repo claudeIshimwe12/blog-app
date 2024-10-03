@@ -107,20 +107,16 @@
       Log Out
     </button>
     }
-    <!-- Avatar-->
+    <!-- Avatar on small screen-->
     <div class="my-2 md:my-0">
-      @if (this.authService.currentUserSig()?.username) {
-      <div
-        class="p-2 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center"
-      >
-        <h1 class="text-center text-xl text-white-primary font-bold">
-          {{
-            this.authService
-              .currentUserSig()
-              ?.username?.charAt(0)
-              ?.toUpperCase()
-          }}
-        </h1>
+      @if (this.authService.currentUserSig()?.photoUrl) {
+
+      <div class="w-8 h-8 rounded-full">
+        <img
+          [src]="this.authService.currentUserSig()?.photoUrl"
+          alt="profile image"
+          class="rounded-full"
+        />
       </div>
       } @else {
 
@@ -191,15 +187,16 @@
       Log Out
     </button>
     }
-    <!-- Avatar-->
+    <!-- Avatar On large screens-->
     <div class="my-2 md:my-0">
-      @if (this.authService.currentUserSig()?.username) {
-      <div
-        class="p-2 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center"
-      >
-        <h1 class="text-center text-x text-white-primary font-bold">
-          {{ this.authService.currentUserSig()?.username?.charAt(0) }}
-        </h1>
+      @if (this.authService.currentUserSig()?.photoUrl) {
+
+      <div class="w-8 h-8 rounded-full">
+        <img
+          [src]="this.authService.currentUserSig()?.photoUrl"
+          alt="profile image"
+          class="rounded-full"
+        />
       </div>
       } @else {
 

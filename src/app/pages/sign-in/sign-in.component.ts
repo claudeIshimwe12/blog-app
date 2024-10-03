@@ -108,7 +108,7 @@ export class SignInComponent implements OnInit {
     this.authService.register(username, email, password).subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/sign-in');
       },
       error: (error) => {
         this.isLoading = false;
