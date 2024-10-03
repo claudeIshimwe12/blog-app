@@ -20,6 +20,8 @@ export class SignInComponent implements OnInit {
   registerForm!: FormGroup;
   public submitted = false;
   error: string | null = null;
+  OauthLoader: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -98,13 +100,18 @@ export class SignInComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
+    this.isLoading = true;
 
     const email = this.registerForm.value.email;
     const password = this.registerForm.value.password;
     const username = this.registerForm.value.username;
     this.authService.register(username, email, password).subscribe({
-      next: () => this.router.navigateByUrl('/sign-in'),
+      next: () => {
+        this.isLoading = false;
+        this.router.navigateByUrl('/');
+      },
       error: (error) => {
+        this.isLoading = false;
         if (error.message.includes('email')) {
           this.error = 'Email already registered';
         }
@@ -113,6 +120,16 @@ export class SignInComponent implements OnInit {
   }
 
   signUpWithGoogle(): void {
-    this.authService.loginWithGoogle();
+    this.OauthLoader = true;
+    this.authService.loginWithGoogle().subscribe({
+      next: () => {
+        this.OauthLoader = false;
+        this.router.navigateByUrl('/');
+      },
+      error: () => {
+        this.OauthLoader = false;
+        this.error = 'Pop Up Closed, please try again 🙏';
+      },
+    });
   }
 }

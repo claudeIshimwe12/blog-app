@@ -72,7 +72,7 @@
       </div>
 
       <!-- Confirm Password Input -->
-      <div class="input__wrapper">
+      <div class="input__wrapper mb-2">
         <input
           [ngClass]="{
             input__error:
@@ -106,7 +106,9 @@
       </div>
 
       <button type="submit" class="bg-green-primary hover:bg-green-hover">
-        Register an account
+        @if (isLoading) {
+        <span>Loading...</span>
+        } @else { Register an account }
       </button>
 
       <h1 class="text-center">Or</h1>
@@ -141,7 +143,13 @@
             />
           </svg>
         </span>
-        <span>Sign Up with Google</span>
+        <h1>
+          @if (OauthLoader) {
+          <span>Loading ...</span>
+          }@else {
+          <span> Sign Up with Google</span>
+          }
+        </h1>
       </div>
     </form>
 
