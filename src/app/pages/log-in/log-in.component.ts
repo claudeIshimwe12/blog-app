@@ -75,9 +75,6 @@ export class LogInComponent implements OnInit {
     );
   }
 
-  /**
-   * Handles Google Sign-In.
-   */
   signInWithGoogle(): void {
     this.OauthLoader = true;
     this.authService.loginWithGoogle().subscribe({
@@ -85,7 +82,7 @@ export class LogInComponent implements OnInit {
         this.OauthLoader = false;
         this.router.navigateByUrl('/');
       },
-      error: (err) => {
+      error: () => {
         this.OauthLoader = false;
         this.error = 'Pop Up Closed, please try again 🙏';
       },

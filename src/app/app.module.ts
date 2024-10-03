@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { BlogComponent } from './components/blog/blog.component';
 const firebaseConfig = {
   apiKey: 'AIzaSyDErNtXiaO8zmtfLHcNYaqGDHRH-_q8Pnc',
   authDomain: 'blog-app-lab.firebaseapp.com',
@@ -25,6 +26,10 @@ const firebaseConfig = {
   appId: '1:760137923827:web:4f3eb9ee6d69f43d804b86',
   measurementId: 'G-9BN7B1630Q',
 };
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +40,17 @@ const firebaseConfig = {
     SignInComponent,
     LogInComponent,
     CreateBlogPageComponent,
+    BlogComponent,
+    TimeAgoPipe,
+    LoaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+  ],
   providers: [
     provideClientHydration(),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),

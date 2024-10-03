@@ -1,1 +1,58 @@
-<section></section>
+<app-nav></app-nav>
+<ng-content *ngIf="isLoading; else content">
+  <div class="height flex justify-center items-center">
+    <app-loader></app-loader>
+  </div>
+</ng-content>
+<ng-template #content>
+  <section class="px-4 md:px-12 py-4 w-full">
+    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+      <div class="flex justify-between gap-4">
+        <input
+          type="text"
+          name="title"
+          id="title"
+          formControlName="title"
+          placeholder=" Title"
+          class="border-b 2 border-b-green-primary w-11/12 py-1 px-0 focus:outline-none caret-green-primary font-semibold"
+        />
+        <div
+          class="flex justify-center items-center gap-2 cursor-pointer hover:bg-green-hover transition-all delay-100 duration-200 ease-in-out bg-green-primary py-1 px-2 rounded-sm"
+        >
+          <!-- Icon for Publish-->
+          <span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.6em"
+              height="1.6em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#ffff"
+                d="M14.143 15.962a.5.5 0 0 1-.244.68l-9.402 4.193c-1.495.667-3.047-.814-2.306-2.202l3.152-5.904c.245-.459.245-1 0-1.458L2.191 5.367c-.74-1.388.81-2.87 2.306-2.202l3.525 1.572a2 2 0 0 1 .974.932z"
+              />
+              <path
+                fill="#ffff"
+                d="M15.533 15.39a.5.5 0 0 0 .651.233l4.823-2.15c1.323-.59 1.323-2.355 0-2.945L12.109 6.56a.5.5 0 0 0-.651.68z"
+                opacity="0.5"
+              />
+            </svg>
+          </span>
+          <button class="text-white-primary text-l font-bold">Publish</button>
+        </div>
+      </div>
+      <!--  Blog Content-->
+      <div class="my-4">
+        <textarea
+          name="blog-content"
+          id="contente"
+          formControlName="description"
+          class="w-full border focus:outline-none py-4 px-8 caret-green-primary"
+          placeholder="Content"
+          rows="15"
+        ></textarea>
+      </div>
+    </form>
+  </section>
+</ng-template>
+<app-footer></app-footer>

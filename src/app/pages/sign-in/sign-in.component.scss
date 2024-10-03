@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 6rem);
+  // min-height: calc(100vh - 6rem);
   background-color: #f4f4f4;
 
   .content {
@@ -30,7 +30,7 @@
     form {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 18px;
 
       .input__wrapper {
         position: relative;
@@ -41,7 +41,7 @@
           font-style: normal;
           font-weight: 400;
           font-size: 15px;
-          line-height: 19px;
+          line-height: 8px;
           color: #16a34a;
           opacity: 0.5;
           background-color: transparent;
@@ -66,7 +66,7 @@
 
         .error__wrapper {
           position: absolute;
-          top: 55px; // Adjusted for better placement
+          top: 48px; // Adjusted for better placement
           left: 0;
           width: 100%;
           color: #fc4747;

@@ -1,20 +1,56 @@
-<section
-  class="px-12 bg-white-hover min-h-full flex flex-col sm:flex-row justify-between items-center gap-2"
->
-  <div>
-    <h1 class="text-[3rem] md:text-[6rem] leading-none">
-      Human <br class="hidden md:block" />
-      stories & ideas
-    </h1>
-    <p class="text-2xl mt-4">
-      A place to read, write, and deepen your understanding
+<app-nav></app-nav>
+
+<section class="px-12 bg-white-primary min-h-full grid grid-cols-3 gap-8 py-8">
+  <div class="col-span-2">
+    <ng-content *ngIf="blogs$ | async as blogs">
+      @for (blog of blogs; track $index) {
+      <app-blog [blog]="blog"></app-blog>
+      }
+    </ng-content>
+  </div>
+  <div class="bg-green-50">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores iusto
+      commodi rem laudantium optio ipsum velit tenetur omnis obcaecati delectus
+      accusamus ut quidem veniam sed perferendis, ab, neque libero, fugiat
+      molestiae perspiciatis magni dolore quia aut magnam. Sequi aspernatur
+      repellat vitae cumque, ea quibusdam numquam voluptate accusantium! Odit
+      autem, laborum earum enim possimus vitae totam facere asperiores eaque
+      quaerat repellendus neque tempora pariatur? Quo obcaecati blanditiis optio
+      rem, harum inventore vero molestias, amet numquam, assumenda ex soluta?
+      Unde vitae itaque eum reiciendis assumenda eveniet repellat pariatur,
+      iure, sed dolorem explicabo deleniti asperiores sapiente a expedita
+      repudiandae beatae, amet error illum quasi vero alias! Quae cum non vel
+      tenetur voluptas. Earum sequi adipisci numquam recusandae vero commodi
+      labore fugit hic nulla, consectetur itaque odit repudiandae excepturi
+      similique optio? Eaque deleniti non natus iste vero! Dignissimos labore
+      distinctio ad! Officiis eaque dignissimos distinctio suscipit odio placeat
+      enim iure dolore modi numquam illum molestiae impedit itaque perferendis
+      assumenda nam soluta a, saepe, voluptatem vel eum accusantium ad cumque
+      atque! Sed at non accusantium cumque dignissimos voluptates iure numquam
+      exercitationem, in optio aperiam, qui saepe dicta quasi laboriosam
+      explicabo laborum, dolore facilis et! In officia ea explicabo minus
+      consectetur sunt consequatur doloremque, similique repellendus?
     </p>
   </div>
+  <!-- <div class="flex">
+    <div>
+      <h1 class="text-[3rem] md:text-[6rem] leading-none">
+        Human <br class="hidden md:block" />
+        stories & ideas
+      </h1>
+      <p class="text-2xl mt-4">
+        A place to read, write, and deepen your understanding
+      </p>
+    </div>
 
-  <div>
-    <img
-      src="https://media.istockphoto.com/id/1658928680/photo/the-world-map-on-lit-light-bulb-on-mossy-tree-concept-of-renewable-energy-sustainable-energy.webp?a=1&b=1&s=612x612&w=0&k=20&c=_pywgqvQZQUitk7eK-T2m9xXDvX-2Waof3fsswUB_kM="
-      alt="bulb image"
-    />
-  </div>
+    <div>
+      <img
+        src="https://media.istockphoto.com/id/1658928680/photo/the-world-map-on-lit-light-bulb-on-mossy-tree-concept-of-renewable-energy-sustainable-energy.webp?a=1&b=1&s=612x612&w=0&k=20&c=_pywgqvQZQUitk7eK-T2m9xXDvX-2Waof3fsswUB_kM="
+        alt="bulb image"
+      />
+    </div>
+  </div> -->
+  <!--  Blogs secitons-->
 </section>
+<app-footer></app-footer>
