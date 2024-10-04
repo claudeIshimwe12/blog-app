@@ -4,12 +4,14 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { CreateBlogPageComponent } from './pages/create-blog-page/create-blog-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'register', component: SignInComponent },
   { path: 'sign-in', component: LogInComponent },
   { path: 'create-blog', component: CreateBlogPageComponent },
+  { path: 'profile', component: ProfilePageComponent },
 ];
 
 @NgModule({

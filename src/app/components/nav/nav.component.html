@@ -107,20 +107,16 @@
       Log Out
     </button>
     }
-    <!-- Avatar-->
+    <!-- Avatar on small screen-->
     <div class="my-2 md:my-0">
-      @if (this.authService.currentUserSig()?.username) {
-      <div
-        class="p-2 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center"
-      >
-        <h1 class="text-center text-xl text-white-primary font-bold">
-          {{
-            this.authService
-              .currentUserSig()
-              ?.username?.charAt(0)
-              ?.toUpperCase()
-          }}
-        </h1>
+      @if (this.authService.currentUserSig()?.photoUrl) {
+
+      <div class="w-8 h-8 rounded-full" routerLink="/profile">
+        <img
+          [src]="this.authService.currentUserSig()?.photoUrl"
+          alt="profile image"
+          class="rounded-full"
+        />
       </div>
       } @else {
 
@@ -148,6 +144,7 @@
     class="hidden md:px-px rounded-md md:rounded-none shadow-md md:shadow-none right-2 md:right-2 top-14 md:top-auto md:flex justify-between flex-col md:flex-row gap-4 bg-white-primary"
   >
     <!-- Write-->
+    @if (this.authService.currentUserSig() !== null){
     <div
       class="flex gap-2 items-center cursor-pointer my-4 md:my-0"
       routerLink="/create-blog"
@@ -167,6 +164,7 @@
       </span>
       <h1 class="text-m">Write</h1>
     </div>
+    }
     <!-- Log in and sign in-->
     @if (this.authService.currentUserSig() === null) {
     <div class="flex gap-2 my-2 md:my-0">
@@ -191,15 +189,16 @@
       Log Out
     </button>
     }
-    <!-- Avatar-->
+    <!-- Avatar On large screens-->
     <div class="my-2 md:my-0">
-      @if (this.authService.currentUserSig()?.username) {
-      <div
-        class="p-2 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center"
-      >
-        <h1 class="text-center text-x text-white-primary font-bold">
-          {{ this.authService.currentUserSig()?.username?.charAt(0) }}
-        </h1>
+      @if (this.authService.currentUserSig()?.photoUrl) {
+
+      <div class="w-8 h-8 rounded-full cursor-pointer" routerLink="/profile">
+        <img
+          [src]="this.authService.currentUserSig()?.photoUrl"
+          alt="profile image"
+          class="rounded-full"
+        />
       </div>
       } @else {
 

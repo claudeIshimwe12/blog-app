@@ -41,10 +41,11 @@ export class CreateBlogPageComponent implements OnInit {
     if (this.blogForm.valid) {
       this.isLoading = true;
       const user = this.authService.currentUserSig();
+
       if (user) {
         this.blogsService
           .createBlog(
-            user.username,
+            user,
             this.blogForm.value.title,
             this.blogForm.value.description
           )

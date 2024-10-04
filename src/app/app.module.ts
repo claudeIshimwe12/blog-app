@@ -30,6 +30,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { PublishedBlogComponent } from './components/published-blog/published-blog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     BlogComponent,
     TimeAgoPipe,
     LoaderComponent,
+    ProfilePageComponent,
+    PublishedBlogComponent,
   ],
   imports: [
     BrowserModule,

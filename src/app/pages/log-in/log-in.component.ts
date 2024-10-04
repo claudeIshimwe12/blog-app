@@ -67,8 +67,6 @@ export class LogInComponent implements OnInit {
         if (error.message.includes('credential')) {
           this.error = 'Invalid Credentials';
         } else {
-          console.log(error.message);
-
           this.error = 'Something went wrong';
         }
       }

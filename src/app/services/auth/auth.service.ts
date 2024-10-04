@@ -10,11 +10,8 @@ import {
   updateProfile,
   user,
 } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import { BehaviorSubject, from, Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { User } from '../../models/user.interface';
-// import { signInWithPopup } from 'firebase/auth';
-// import { User } from "../../models/user.interface";
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +20,7 @@ export class AuthService {
   fireAuth = inject(Auth);
   user$ = user(this.fireAuth);
 
-  currentUserSig = signal<User | null | undefined>(undefined);
+  currentUserSig = signal<User | undefined | null>(undefined);
 
   register(
     username: string,

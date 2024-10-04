@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
         this.autService.currentUserSig.set({
           email: user.email!,
           username: user.displayName!,
+          photoUrl: user.photoURL!,
         });
       } else {
         this.autService.currentUserSig.set(null);
