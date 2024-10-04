@@ -42,7 +42,7 @@
       </svg>
     </span>
   </div>
-  <button class="md:hidden" (click)="toggleMenu()">
+  <button id="menu" aria-label="menu" class="md:hidden" (click)="toggleMenu()">
     <span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -87,12 +87,16 @@
     <!-- Log in and sign in-->
     <div class="flex gap-2 my-2 md:my-0">
       <button
+        id="sign-up"
+        aria-label="sign-up"
         routerLink="/register"
         class="bg-green-600 hover:bg-green-400 text-white-primary rounded-full px-4 py-1 text-m"
       >
         Sign Up
       </button>
       <button
+        id="sign-in"
+        aria-label="sign-in"
         routerLink="/sign-in"
         class="px-4 py-1 text-m hover:bg-white-hover rounded-full hover:font-semibold transition-all duration-300"
       >
@@ -101,6 +105,8 @@
     </div>
     } @else {
     <button
+      id="log-out"
+      aria-label="log-out"
       class="bg-grey-primary hover:bg-red-hover text-white-primary rounded-full px-4 py-0 text-m"
       (click)="logOut()"
     >
@@ -169,12 +175,16 @@
     @if (this.authService.currentUserSig() === null) {
     <div class="flex gap-2 my-2 md:my-0">
       <button
+        id="sign-up"
+        aria-label="sign-up"
         routerLink="/register"
         class="bg-green-600 hover:bg-green-400 text-white-primary rounded-full px-4 py-1 text-m"
       >
         Sign Up
       </button>
       <button
+        id="sign-in"
+        aria-label="sign-in"
         routerLink="/sign-in"
         class="px-4 py-1 text-m hover:bg-white-hover rounded-full hover:font-semibold transition-all duration-300"
       >
@@ -183,6 +193,8 @@
     </div>
     } @else {
     <button
+      id="log-out"
+      aria-label="log-out"
       class="bg-grey-primary hover:bg-red-hover text-white-primary rounded-full px-4 py-0 text-s"
       (click)="logOut()"
     >
