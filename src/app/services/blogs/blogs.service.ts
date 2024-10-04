@@ -1,12 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import { User, user } from '@angular/fire/auth';
 import {
   addDoc,
   collection,
   collectionData,
   deleteDoc,
   doc,
+  docData,
   Firestore,
+  setDoc,
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { Blog, Comment } from '../../models/blog.interface';
@@ -46,6 +47,17 @@ export class BlogsService {
   deleteBlog(id: string): Observable<void> {
     const docRef = doc(this.firestore, 'blogs/' + id);
     const promise = deleteDoc(docRef);
+    return from(promise);
+  }
+
+  getDocumentById(docId: string): Observable<any> {
+    const documentReference = doc(this.firestore, `blogs/${docId}`);
+    return docData(documentReference);
+  }
+
+  updateBlog(blogId: string, dataToUpdate: Blog): Observable<void> {
+    const docRef = doc(this.firestore, 'blogs/' + blogId);
+    const promise = setDoc(docRef, dataToUpdate);
     return from(promise);
   }
 }

@@ -1,4 +1,4 @@
-import { importProvidersFrom, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
   BrowserModule,
   provideClientHydration,
@@ -17,21 +17,23 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { BlogComponent } from './components/blog/blog.component';
-const firebaseConfig = {
-  apiKey: 'AIzaSyDErNtXiaO8zmtfLHcNYaqGDHRH-_q8Pnc',
-  authDomain: 'blog-app-lab.firebaseapp.com',
-  projectId: 'blog-app-lab',
-  storageBucket: 'blog-app-lab.appspot.com',
-  messagingSenderId: '760137923827',
-  appId: '1:760137923827:web:4f3eb9ee6d69f43d804b86',
-  measurementId: 'G-9BN7B1630Q',
-};
+import { environment } from '../environments/environment';
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyDErNtXiaO8zmtfLHcNYaqGDHRH-_q8Pnc',
+//   authDomain: 'blog-app-lab.firebaseapp.com',
+//   projectId: 'blog-app-lab',
+//   storageBucket: 'blog-app-lab.appspot.com',
+//   messagingSenderId: '760137923827',
+//   appId: '1:760137923827:web:4f3eb9ee6d69f43d804b86',
+//   measurementId: 'G-9BN7B1630Q',
+// };
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { PublishedBlogComponent } from './components/published-blog/published-blog.component';
+import { BlogEditPageComponent } from './pages/blog-edit-page/blog-edit-page.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { PublishedBlogComponent } from './components/published-blog/published-bl
     LoaderComponent,
     ProfilePageComponent,
     PublishedBlogComponent,
+    BlogEditPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import { PublishedBlogComponent } from './components/published-blog/published-bl
   ],
   providers: [
     provideClientHydration(),
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
   ],
