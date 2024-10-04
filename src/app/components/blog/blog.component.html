@@ -30,13 +30,11 @@
   <h1 class="text-black-primary text-2xl font-bold">
     {{ blog.title }}
   </h1>
-  <p class="text-grey-primary">
-    {{ blog.description }}
-  </p>
+  <p class="text-grey-primary">{{ blog.description.slice(0, 200) }} ...</p>
   <!-- Date, Comments and likes -->
   <div class="flex gap-4">
     <h1>
-      ⭐ <span class="text-s">{{ blog.createdAt | timeAgo }}</span>
+      ⭐ <span class="text-s">Published {{ blog.createdAt | timeAgo }}</span>
     </h1>
     <h1>
       👍 <span class="text-s">{{ blog.likes }}</span>

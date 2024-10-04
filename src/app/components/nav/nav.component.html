@@ -111,7 +111,7 @@
     <div class="my-2 md:my-0">
       @if (this.authService.currentUserSig()?.photoUrl) {
 
-      <div class="w-8 h-8 rounded-full">
+      <div class="w-8 h-8 rounded-full" routerLink="/profile">
         <img
           [src]="this.authService.currentUserSig()?.photoUrl"
           alt="profile image"
@@ -144,6 +144,7 @@
     class="hidden md:px-px rounded-md md:rounded-none shadow-md md:shadow-none right-2 md:right-2 top-14 md:top-auto md:flex justify-between flex-col md:flex-row gap-4 bg-white-primary"
   >
     <!-- Write-->
+    @if (this.authService.currentUserSig() !== null){
     <div
       class="flex gap-2 items-center cursor-pointer my-4 md:my-0"
       routerLink="/create-blog"
@@ -163,6 +164,7 @@
       </span>
       <h1 class="text-m">Write</h1>
     </div>
+    }
     <!-- Log in and sign in-->
     @if (this.authService.currentUserSig() === null) {
     <div class="flex gap-2 my-2 md:my-0">
@@ -191,7 +193,7 @@
     <div class="my-2 md:my-0">
       @if (this.authService.currentUserSig()?.photoUrl) {
 
-      <div class="w-8 h-8 rounded-full">
+      <div class="w-8 h-8 rounded-full cursor-pointer" routerLink="/profile">
         <img
           [src]="this.authService.currentUserSig()?.photoUrl"
           alt="profile image"

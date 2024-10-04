@@ -1,0 +1,99 @@
+<app-nav></app-nav>
+<section class="grid grid-cols-1 md:grid-cols-3 w-full gap-4 sm:gap-2">
+  <div class="md:col-span-2 px-4 md:px-24 py-4 md:py-8 border-r">
+    <div class="border-b border-b-grey-primary pb-4 my-4">
+      <div class="flex justify-between flex-col md:flex-row items-center">
+        <h1 class="text-black-primary text-xl sm:text-m md:text-4xl">
+          Your Stories
+        </h1>
+        <div class="gap-1 md:gap-2 flex">
+          <button
+            class="py-1 px-2 sm:px-1 md:px-4 rounded-full bg-green-primary hover:bg-green-hover text-white-primary"
+            routerLink="/create-blog"
+          >
+            Write a story
+          </button>
+          <button
+            class="py-1 px-4 rounded-full bg-white-primary hover:bg-white-hover border text-black-primary"
+          >
+            Import a story
+          </button>
+        </div>
+      </div>
+      <div class="flex gap-2 mt-2">
+        <h1 class="font-light text-m text-grey-primary">
+          Published
+          <ng-content *ngIf="blogs$ | async as blogs">
+            @if (blogs.length) {
+            <span class="font-bold"> ({{ blogs.length }})</span>
+            }</ng-content
+          >
+        </h1>
+        <h1 class="font-light text-m text-grey-primary">Drafts</h1>
+      </div>
+    </div>
+    <ng-content *ngIf="blogs$ | async as blogs">
+      @for (blog of blogs; track $index) {
+      <!-- <app-blog [blog]="blog"></app-blog> -->
+      <app-published-blog
+        [blog]="blog"
+        (deleteBlog)="deleteBlog($event)"
+      ></app-published-blog>
+      }
+    </ng-content>
+  </div>
+  <div class="px-4 md:px-12 py-8">
+    <h1 class="font-normal">Staff Picks</h1>
+    <!-- On newsletter-->
+    <div class="my-4">
+      <div class="flex justify-start items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-black-hover"></div>
+        <h1 class="text-s text-grey-primary my-2">
+          The SocRadar Newsletter in the SocRadar blog
+        </h1>
+      </div>
+      <h1 class="text-black-primary font-black">
+        Monogamy is overrated (at work)
+      </h1>
+    </div>
+    <!-- On newsletter-->
+    <div class="my-4">
+      <div class="flex justify-start items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-black-hover"></div>
+        <h1 class="text-s text-grey-primary my-2">
+          Besanya Santiago Ayala in Iberospherical
+        </h1>
+      </div>
+      <h1 class="text-black-primary font-black">
+        How I’m Celebrating National Hispanic Heritage Month
+      </h1>
+    </div>
+    <!-- On newsletter-->
+    <div class="my-4">
+      <div class="flex justify-start items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-black-hover"></div>
+        <h1 class="text-s text-grey-primary my-2">Alberto Romero</h1>
+      </div>
+      <h1 class="text-black-primary font-black">
+        30 Things I’ve Learned About AI
+      </h1>
+    </div>
+    <h2 class="text-green-primary cursor-pointer hover:text-green-hover">
+      See the full list
+    </h2>
+
+    <!--   FAQ-->
+    <div
+      class="bg-white-hover p-4 rounded-md mt-2 flex gap-2 flex-col justify-start"
+    >
+      <h1 class="text-black-primary text-xl">Writting on SocRadar</h1>
+      <p>New writer FAQ Expert writing advice Grow your readership</p>
+      <button
+        class="w-1/2 bg-black-primary text-white-primary py-1 px-2 rounded-md mt-2 text-s"
+      >
+        Start writing
+      </button>
+    </div>
+  </div>
+</section>
+<app-footer> </app-footer>

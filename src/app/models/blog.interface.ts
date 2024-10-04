@@ -1,7 +1,7 @@
 import { User } from './user.interface';
 
 export interface Blog {
-  id?: string;
+  id: string;
   title: string;
   author: User;
   description: string;
