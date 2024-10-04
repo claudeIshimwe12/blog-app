@@ -4,11 +4,16 @@
   class="px-4 md:px-12 bg-white-primary min-h-full grid grid-cols-1 md:grid-cols-3 gap-8 py-8"
 >
   <div class="md:col-span-2">
-    <ng-content *ngIf="blogs$ | async as blogs">
+    <ng-content *ngIf="blogs$ | async as blogs; else loader">
       @for (blog of blogs; track $index) {
       <app-blog [blog]="blog"></app-blog>
       }
     </ng-content>
+    <ng-template #loader>
+      <div class="flex justify-center items-center min-h-full">
+        <app-loader></app-loader>
+      </div>
+    </ng-template>
   </div>
   <div class="bg-green-50">
     <p>
