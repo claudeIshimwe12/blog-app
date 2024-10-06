@@ -11,6 +11,7 @@ export interface Blog {
 }
 
 export interface Comment {
-  username: string;
+  commentAuthor: User | null | undefined;
   comment: string;
+  commentedAt: string;
 }

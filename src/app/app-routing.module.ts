@@ -6,14 +6,35 @@ import { LogInComponent } from './pages/log-in/log-in.component';
 import { CreateBlogPageComponent } from './pages/create-blog-page/create-blog-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { BlogEditPageComponent } from './pages/blog-edit-page/blog-edit-page.component';
+import { BlogPageComponent } from './pages/blog-page/blog-page.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'register', component: SignInComponent },
+  {
+    path: '',
+    redirectTo: 'sign-in',
+    pathMatch: 'full',
+  },
   { path: 'sign-in', component: LogInComponent },
-  { path: 'create-blog', component: CreateBlogPageComponent },
-  { path: 'profile', component: ProfilePageComponent },
-  { path: 'edit/:id', component: BlogEditPageComponent },
+  { path: 'register', component: SignInComponent },
+
+  { path: 'home', canActivate: [AuthGuard], component: HomePageComponent },
+  {
+    path: 'create-blog',
+    canActivate: [AuthGuard],
+    component: CreateBlogPageComponent,
+  },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    component: ProfilePageComponent,
+  },
+  {
+    path: 'edit/:id',
+    canActivate: [AuthGuard],
+    component: BlogEditPageComponent,
+  },
+  { path: 'blogs/:id', canActivate: [AuthGuard], component: BlogPageComponent },
 ];
 
 @NgModule({

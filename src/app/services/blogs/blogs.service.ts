@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import {
   addDoc,
+  arrayUnion,
   collection,
   collectionData,
   deleteDoc,
@@ -8,6 +9,7 @@ import {
   docData,
   Firestore,
   setDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { Blog, Comment } from '../../models/blog.interface';
@@ -58,6 +60,16 @@ export class BlogsService {
   updateBlog(blogId: string, dataToUpdate: Blog): Observable<void> {
     const docRef = doc(this.firestore, 'blogs/' + blogId);
     const promise = setDoc(docRef, dataToUpdate);
+    return from(promise);
+  }
+
+  addComment(blogId: string, comment: Comment) {
+    const docRef = doc(this.firestore, 'blogs/' + blogId);
+
+    const promise = updateDoc(docRef, {
+      comments: arrayUnion(comment),
+    });
+
     return from(promise);
   }
 }
