@@ -1,6 +1,6 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -16,8 +16,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     if (!isPlatformBrowser(this.platformId)) {
-      // During prerendering, allow access or handle accordingly
-      return of(true); // or of(false) to restrict access
+      return of(true);
     }
     return this.authService.user$.pipe(
       map((firebaseUser) => {
@@ -27,6 +26,11 @@ export class AuthGuard implements CanActivate {
           this.router.navigate(['/sign-in']);
           return false;
         }
+      }),
+      catchError((error) => {
+        console.error('AuthGuard Error:', error);
+        this.router.navigate(['/login']);
+        return of(false);
       })
     );
   }
