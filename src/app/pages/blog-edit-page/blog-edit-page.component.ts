@@ -78,7 +78,7 @@ export class BlogEditPageComponent implements OnInit {
                 timeOut: 1500,
               });
               this.isLoading = false;
-              this.router.navigateByUrl('/');
+              this.router.navigateByUrl('/home');
             },
             error: (err) =>
               this.toastr.error('Something went wrong 😒', 'Major Error', {
