@@ -25,7 +25,7 @@ This project is a **Blog Platform** built with **Angular** and integrated with *
 
 You can check out the hosted demo of the Blog Platform at the following link:
 
-[Hosted Demo Website](#) _(Replace with the actual demo URL)_
+[Hosted Demo Website](#) _([link](https://blog-app-lab.web.app/sign-in))_
 
 ---
 
