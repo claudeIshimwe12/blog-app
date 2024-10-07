@@ -27,6 +27,9 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { PublishedBlogComponent } from './components/published-blog/published-blog.component';
 import { BlogEditPageComponent } from './pages/blog-edit-page/blog-edit-page.component';
 import { BlogPageComponent } from './pages/blog-page/blog-page.component';
+import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getFunctions, provideFunctions } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -58,6 +61,12 @@ import { BlogPageComponent } from './pages/blog-page/blog-page.component';
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+    provideFirebaseApp(() => initializeApp({"projectId":"blog-app-lab","appId":"1:760137923827:web:4f3eb9ee6d69f43d804b86","storageBucket":"blog-app-lab.appspot.com","apiKey":"AIzaSyDErNtXiaO8zmtfLHcNYaqGDHRH-_q8Pnc","authDomain":"blog-app-lab.firebaseapp.com","messagingSenderId":"760137923827","measurementId":"G-9BN7B1630Q"})),
+    provideAnalytics(() => getAnalytics()),
+    ScreenTrackingService,
+    UserTrackingService,
+    provideStorage(() => getStorage()),
+    provideFunctions(() => getFunctions()),
   ],
   bootstrap: [AppComponent],
 })

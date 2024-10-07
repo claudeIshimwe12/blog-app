@@ -68,7 +68,7 @@ export class BlogEditPageComponent implements OnInit {
             description: this.blogForm.value.description,
             author: this.blog.author,
             comments: [],
-            likes: 0,
+            likes: this.blog.likes,
             createdAt: this.blog.createdAt,
             id: this.blogId,
           })

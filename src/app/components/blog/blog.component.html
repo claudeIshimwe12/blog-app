@@ -34,13 +34,21 @@
     <p class="text-grey-primary">{{ blog.description.slice(0, 200) }} ...</p>
   </div>
   <!-- Date, Comments and likes -->
-  <div class="flex gap-4">
+  <div class="flex gap-4 cursor-pointer" (click)="onBlogClick()">
     <h1>
       ⭐ <span class="text-s">Published {{ blog.createdAt | timeAgo }}</span>
     </h1>
-    <h1>
-      👍 <span class="text-s">{{ blog.likes }}</span>
-    </h1>
+    <div>
+      <span
+        class="cursor-pointer p-1 rounded-md mx-2 hover:bg-grey-hover transition-all divide-blue-100 delay-100 ease-linear"
+        [ngClass]="{
+          'bg-grey-hover': blog.likes.includes(currUserName)
+        }"
+      >
+        👍
+      </span>
+      <span>{{ blog.likes.length }}</span>
+    </div>
     <h1>
       💬 <span class="text-s">{{ blog.comments.length }}</span>
     </h1>

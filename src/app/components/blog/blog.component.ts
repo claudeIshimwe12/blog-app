@@ -12,6 +12,7 @@ export class BlogComponent {
   @Input({ required: true }) blog!: Blog;
   authService = inject(AuthService);
   router = inject(Router);
+  currUserName: string = this.authService.currentUserSig()?.username ?? '';
 
   onBlogClick() {
     this.router.navigate(['/blogs', this.blog.id]);

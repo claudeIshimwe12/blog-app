@@ -4,7 +4,6 @@ import { BlogsService } from '../../services/blogs/blogs.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { title } from 'process';
 import { Comment } from '../../models/blog.interface';
 
 @Component({
@@ -18,6 +17,7 @@ export class BlogPageComponent {
   blog$!: Observable<Blog>;
   authService = inject(AuthService);
   showCommentsModal: boolean = false;
+  currUserName: string = this.authService.currentUserSig()?.username ?? '';
   comment: string = '';
 
   constructor(
@@ -57,5 +57,10 @@ export class BlogPageComponent {
       this.blogsService.addComment(this.blogId, com);
       this.comment = '';
     }
+  }
+
+  onLikeClick() {
+    const userName: string = this.authService.currentUserSig()?.username ?? '';
+    this.blogsService.likeBlog(this.blogId, userName);
   }
 }

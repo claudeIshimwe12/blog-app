@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import {
   addDoc,
+  arrayRemove,
   arrayUnion,
   collection,
   collectionData,
@@ -8,6 +9,7 @@ import {
   doc,
   docData,
   Firestore,
+  getDoc,
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
@@ -69,6 +71,31 @@ export class BlogsService {
     const promise = updateDoc(docRef, {
       comments: arrayUnion(comment),
     });
+
+    return from(promise);
+  }
+
+  likeBlog(blogId: string, userName: string): Observable<void> {
+    const docRef = doc(this.firestore, 'blogs/' + blogId);
+
+    const promise = getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const likes = docSnap.data()?.['likes'] || [];
+
+          if (likes.includes(userName)) {
+            return updateDoc(docRef, { likes: arrayRemove(userName) }); // Remove user if already liked
+          } else {
+            return updateDoc(docRef, { likes: arrayUnion(userName) }); // Add user if not yet liked
+          }
+        } else {
+          return Promise.resolve();
+        }
+      })
+      .catch((error) => {
+        console.error('Error toggling like: ', error);
+        return Promise.reject(error);
+      });
 
     return from(promise);
   }

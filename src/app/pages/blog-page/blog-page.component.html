@@ -29,7 +29,18 @@
     </div>
     <!--  Like and comments-->
     <div class="border-t border-b flex gap-4 my-4 py-2">
-      <h1>👍 {{ blog.likes }}</h1>
+      <div>
+        <span
+          class="cursor-pointer p-1 rounded-md mx-2 hover:bg-grey-hover transition-all divide-blue-100 delay-100 ease-linear"
+          [ngClass]="{
+            'bg-grey-hover': blog.likes.includes(currUserName)
+          }"
+          (click)="onLikeClick()"
+        >
+          👍
+        </span>
+        <span>{{ blog.likes.length }}</span>
+      </div>
       <h1 class="cursor-pointer" (click)="onOpenCommentModal()">
         💬 {{ blog.comments.length }}
       </h1>
