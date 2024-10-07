@@ -1,13 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import {
   addDoc,
+  arrayRemove,
+  arrayUnion,
   collection,
   collectionData,
   deleteDoc,
   doc,
   docData,
   Firestore,
+  getDoc,
   setDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { Blog, Comment } from '../../models/blog.interface';
@@ -58,6 +62,41 @@ export class BlogsService {
   updateBlog(blogId: string, dataToUpdate: Blog): Observable<void> {
     const docRef = doc(this.firestore, 'blogs/' + blogId);
     const promise = setDoc(docRef, dataToUpdate);
+    return from(promise);
+  }
+
+  addComment(blogId: string, comment: Comment) {
+    const docRef = doc(this.firestore, 'blogs/' + blogId);
+
+    const promise = updateDoc(docRef, {
+      comments: arrayUnion(comment),
+    });
+
+    return from(promise);
+  }
+
+  likeBlog(blogId: string, userName: string): Observable<void> {
+    const docRef = doc(this.firestore, 'blogs/' + blogId);
+
+    const promise = getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const likes = docSnap.data()?.['likes'] || [];
+
+          if (likes.includes(userName)) {
+            return updateDoc(docRef, { likes: arrayRemove(userName) }); // Remove user if already liked
+          } else {
+            return updateDoc(docRef, { likes: arrayUnion(userName) }); // Add user if not yet liked
+          }
+        } else {
+          return Promise.resolve();
+        }
+      })
+      .catch((error) => {
+        console.error('Error toggling like: ', error);
+        return Promise.reject(error);
+      });
+
     return from(promise);
   }
 }

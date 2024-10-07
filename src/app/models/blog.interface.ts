@@ -5,12 +5,13 @@ export interface Blog {
   title: string;
   author: User;
   description: string;
-  likes: number;
+  likes: string[];
   comments: Comment[];
   createdAt: string;
 }
 
 export interface Comment {
-  username: string;
+  commentAuthor: User | null | undefined;
   comment: string;
+  commentedAt: string;
 }

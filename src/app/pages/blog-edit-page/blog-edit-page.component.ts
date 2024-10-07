@@ -68,7 +68,7 @@ export class BlogEditPageComponent implements OnInit {
             description: this.blogForm.value.description,
             author: this.blog.author,
             comments: [],
-            likes: 0,
+            likes: this.blog.likes,
             createdAt: this.blog.createdAt,
             id: this.blogId,
           })
@@ -78,7 +78,7 @@ export class BlogEditPageComponent implements OnInit {
                 timeOut: 1500,
               });
               this.isLoading = false;
-              this.router.navigateByUrl('/');
+              this.router.navigateByUrl('/home');
             },
             error: (err) =>
               this.toastr.error('Something went wrong 😒', 'Major Error', {

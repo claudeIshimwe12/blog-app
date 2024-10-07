@@ -1,10 +1,41 @@
-# BlogAppV2
+# Blog Platform
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
+This project is a **Blog Platform** built with **Angular** and integrated with **Firebase services**. It implements **SEO best practices** and supports **Server-Side Rendering (SSR)** using **Angular Universal**.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 1. Authentication
+
+- **Email/Password Registration and Login**: Secure user authentication using Firebase's email/password system.
+- **Google Sign-In**: OAuth integration for easy authentication via Google.
+- **User Profile Page**: Each user can view and edit their profile information.
+
+### 2. Blog Post Management
+
+- **CRUD Operations**: Create, read, update, and delete blog posts, fully integrated with Firebase's Firestore.
+- **Real-Time Comments**: Blog posts support real-time comments, with listeners that automatically update the comments section when new comments are added.
+
+### 3. SEO and Server-Side Rendering (SSR)
+
+- **Angular Universal Integration**: Server-Side Rendering (SSR) is set up to improve SEO and initial load performance.
+
+---
+
+## Hosted Demo
+
+You can check out the hosted demo of the Blog Platform at the following link:
+
+[Hosted Demo Website](#) _([link](https://blog-app-lab.web.app/sign-in))_
+
+---
+
+## Development Server
+
+To start the development server, run:
+
+```bash
+ng serve
+```
 
 ## Code scaffolding
 

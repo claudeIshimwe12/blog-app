@@ -5,7 +5,23 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/home/index.html"
+      },
+      {
+        "source": "/create-blog",
+        "destination": "/create-blog/index.html"
+      },
+      {
+        "source": "/sign-in",
+        "destination": "/sign-in/index.html"
+      },
+      {
+        "source": "/register",
+        "destination": "/register/index.html"
+      },
+      {
+        "source": "/profile",
+        "destination": "/profile/index.html"
       }
     ]
   }

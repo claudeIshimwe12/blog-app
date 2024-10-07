@@ -1,0 +1,164 @@
+<app-nav></app-nav>
+
+<ng-content *ngIf="blog$ | async as blog; else loader">
+  <div class="px-4 md:px-36 py-8 height">
+    <h1 class="text-start">✨ Member-only story</h1>
+    <h1 class="text-black-primary text-xl md:text-3xl text-start font-black">
+      {{ blog.title }}
+    </h1>
+    <!-- Author recognition-->
+    <div class="flex items-center gap-2">
+      <!-- Avatar -->
+      <div class="h-8 w-8 rounded-full">
+        <img
+          [src]="blog.author.photoUrl"
+          alt="author profile"
+          class="h-full w-full rounded-full"
+        />
+      </div>
+      <div>
+        <h1>{{ blog.author.username }}</h1>
+        <div class="flex gap-2 items-center text-s text-grey-primary">
+          <h1>Published in SocRadar</h1>
+          <div class="w-1 h-1 rounded-full bg-grey-primary">.</div>
+          <h1>11 min read</h1>
+          <div class="w-1 h-1 rounded-full bg-grey-primary">.</div>
+          <h1>{{ blog.createdAt | date : "MMM d, y" }}</h1>
+        </div>
+      </div>
+    </div>
+    <!--  Like and comments-->
+    <div class="border-t border-b flex gap-4 my-4 py-2">
+      <div>
+        <span
+          class="cursor-pointer p-1 rounded-md mx-2 hover:bg-grey-hover transition-all divide-blue-100 delay-100 ease-linear"
+          [ngClass]="{
+            'bg-grey-hover': blog.likes.includes(currUserName)
+          }"
+          (click)="onLikeClick()"
+        >
+          👍
+        </span>
+        <span>{{ blog.likes.length }}</span>
+      </div>
+      <h1 class="cursor-pointer" (click)="onOpenCommentModal()">
+        💬 {{ blog.comments.length }}
+      </h1>
+    </div>
+    <!--  Blog content-->
+    <section>
+      <h1>{{ blog.description }}</h1>
+    </section>
+  </div>
+  @if (showCommentsModal) {
+  <section
+    class="fixed top-0 flex justify-center md:justify-end md:items-stretch items-center bg-black-primary bg-opacity-50 min-h-screen w-full"
+    (click)="onModalClick($event)"
+  >
+    <div
+      class="bg-white-primary md:min-h-screen h-full md:w-1/3 w-11/12 p-8 shadow-md"
+      (click)="overridePropagation($event)"
+    >
+      <div class="flex justify-between items-center">
+        <h1 class="text-black-primary font-black text-l">
+          Comments ({{ blog.comments.length }})
+        </h1>
+        <span class="cursor-pointer" (click)="onCloseCommentModal()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.6em"
+            height="1.7em"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#686D76"
+              d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"
+            />
+          </svg>
+        </span>
+      </div>
+      <!-- Comment area-->
+      <div class="p-4 bg-white-primary shadow-md my-2">
+        <!--   avatar-->
+        <div class="flex gap-2 my-2">
+          @if (authService.currentUserSig()?.photoUrl) {
+
+          <div class="h-8 w-8 rounded-full">
+            <img
+              [src]="authService.currentUserSig()?.photoUrl"
+              alt="author profile"
+              class="h-full w-full rounded-full"
+            />
+          </div>
+          }
+          <h1>{{ authService.currentUserSig()?.username }}</h1>
+        </div>
+        <!-- Text area-->
+        <textarea
+          [(ngModel)]="comment"
+          name="comment"
+          class="focus:outline-none"
+          id="comment"
+          cols="30"
+          rows="4"
+          placeholder="What are your thoughts?"
+        ></textarea>
+        <div class="w-full flex justify-end">
+          <div class="flex gap-2">
+            <button
+              (click)="onCloseCommentModal()"
+              class="hover:text-grey-primary"
+            >
+              Cancel
+            </button>
+            <button
+              class="py-1 px-2 rounded-full bg-green-primary hover:bg-green-hover text-white-primary"
+              (click)="onRespond()"
+            >
+              Respond
+            </button>
+          </div>
+        </div>
+      </div>
+      <ng-content *ngIf="blog.comments">
+        <h1 class="text-black-primary text-l font-bold my-4">MOST RELEVANT</h1>
+        <div class="overflow-y-scroll hide-scroll-bar h-64 my-2">
+          @for (comment of blog.comments; track $index) {
+          <div>
+            @if (comment.commentAuthor) {
+            <!-- Avatar -->
+            <div class="flex gap-4 items-center">
+              <div class="h-8 w-8 rounded-full">
+                <img
+                  [src]="comment.commentAuthor.photoUrl"
+                  alt="author profile"
+                  class="h-full w-full rounded-full"
+                />
+              </div>
+              <div>
+                <h1>{{ comment.commentAuthor.username }}</h1>
+                <h2 class="text-s font-light">
+                  {{ comment.commentedAt | timeAgo }}
+                </h2>
+              </div>
+            </div>
+            <h1 class="my-3 text-m font-normal">{{ comment.comment }}</h1>
+
+            } @else {
+
+            <h1>No authoer</h1>
+            }
+          </div>
+          }
+        </div>
+      </ng-content>
+    </div>
+  </section>
+  }
+</ng-content>
+<ng-template #loader>
+  <div class="height flex justify-center items-center">
+    <app-loader></app-loader>
+  </div>
+</ng-template>
+<app-footer></app-footer>

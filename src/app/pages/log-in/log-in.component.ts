@@ -58,7 +58,7 @@ export class LogInComponent implements OnInit {
       () => {
         this.isLoading = false;
         // reset the form and navigate to another page
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/home');
         this.signInForm.reset();
         this.submitted = false;
       },
@@ -78,7 +78,7 @@ export class LogInComponent implements OnInit {
     this.authService.loginWithGoogle().subscribe({
       next: () => {
         this.OauthLoader = false;
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/home');
       },
       error: () => {
         this.OauthLoader = false;
